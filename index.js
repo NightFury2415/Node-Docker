@@ -43,8 +43,12 @@ app.use(session({
     }
 }));
 
-app.use('/posts', postRouter);
-app.use('/users', userRouter);
+app.get('/api/v1', (req, res) => {
+    res.send("<h2> Hi There!</h2>")
+})
+
+app.use('/api/v1posts', postRouter);
+app.use('/api/v1users', userRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
