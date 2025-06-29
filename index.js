@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const session = require('express-session');
 const redis = require('redis');
 const RedisStore = require('connect-redis')(session); // v6 syntax
@@ -31,6 +32,7 @@ mongoose.connect("mongodb://root:example@mongo:27017/?authSource=admin", {
 
 app.use(express.json());
 app.enable('trust proxy'); // Trust the reverse proxy (Nginx)
+app.use(cors({}));
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: process.env.SESSION_SECRET || 'defaultsecret',
