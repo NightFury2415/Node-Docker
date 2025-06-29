@@ -30,7 +30,7 @@ mongoose.connect("mongodb://root:example@mongo:27017/?authSource=admin", {
     });
 
 app.use(express.json());
-
+app.enable('trust proxy'); // Trust the reverse proxy (Nginx)
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: process.env.SESSION_SECRET || 'defaultsecret',
